@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     View,
     Text,
@@ -6,7 +6,8 @@ import {
     SafeAreaView, 
     TextInput, 
     Platform,
-    TouchableOpacity,
+    FlatList,
+    StatusBar
  } from 'react-native';
  import { Button } from '../components/Button'
 import { SkillCard } from '../components/SkillCard';
@@ -15,6 +16,19 @@ import { SkillCard } from '../components/SkillCard';
 export function Home(){
     const [newSkill, setNewSkill]= useState('');
     const [mySkills, setMySkills]= useState([]);
+    const [greeting, setGreeting]= useState('')
+
+    useEffect(()=>{
+        const currentHour= new Date().getHours();
+        if(currentHour < 12){
+            setGreeting('Good Morning')
+        }
+        else if(currentHour >= 12 && currentHour < 18){
+            setGreeting('Good afternoon')
+        }else{
+            setGreeting('Good Night')
+        }
+    },)
 
     function handleAddNewSkill(){
         setMySkills(oldState=> [...oldState, newSkill])
@@ -23,7 +37,12 @@ export function Home(){
 
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>
+
                 Welcome, João
+            </Text>
+
+            <Text style={styles.greetings}>
+                {greeting}
             </Text>
             <TextInput 
                 style={styles.input}
@@ -36,12 +55,14 @@ export function Home(){
             <Text style={[styles.title, {marginVertical: 40}]}>
                 My Skills
             </Text>
-            
-            {
-                mySkills.map(skill=> (  
-                    <SkillCard skill={skill}/>
-                ))   
-            }
+            <FlatList 
+                data={mySkills}
+                keyExtractor={item=> item}
+                renderItem={({item})=> (
+                    <SkillCard skill={item}/>
+                )}
+                showsVerticalScrollIndicator={false}
+            />
         </SafeAreaView>
 
     )
@@ -67,6 +88,9 @@ const styles= StyleSheet.create({
           marginTop: 30,
           borderRadius: 8
       },
+      greetings:{
+          color: '#fff'
+      }
 
 
 })
