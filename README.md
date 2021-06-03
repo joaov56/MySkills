@@ -22,11 +22,11 @@ O projeto foi desenvolvido usando as seguintes tecnologias
 ```bash
 
     #Clonar repositório
-    $ git clone https://github.com/joaov56/foodfy
+    $ git clone https://github.com/joaov56/MySkills
 
     #Instalar dependências
     $ yarn install
 
     #Iniciar o projeto
-    $ yarn start
+    $ yarn run android / yarn run ios
 ```
