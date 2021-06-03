@@ -25,7 +25,7 @@ O projeto foi desenvolvido usando as seguintes tecnologias
     $ git clone https://github.com/joaov56/MySkills
 
     #Instalar dependências
-    $ yarn install
+    $ yarn 
 
     #Iniciar o projeto
     $ yarn run android / yarn run ios
